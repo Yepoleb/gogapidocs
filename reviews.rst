@@ -4,20 +4,20 @@ Reviews
 .. http:get:: /reviews/product/(int:game_id).json
 
     Returns the reviews for a game.
-    
+
     :query page: Page number
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /reviews/product/1207659103.json HTTP/1.1
         Host: embed.gog.com
 
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {
           "reviews": [
             {
@@ -42,51 +42,51 @@ Reviews
           "totalPages": 19,
           "totalResults": "92"
         }
-    
+
 
 .. http:post:: /reviews/vote/review/(int:review_id).json
 
     Vote if an individual review is helpful.
-    
+
     :param review_id: ID of the review to be voted on
     :type review_id: int
-    
+
     :reqjson bool wasHelpful: Whether the review was helpful or not
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         POST /reviews/vote/review/1234567.json HTTP/1.1
         Host: embed.gog.com
         Content-Type: application/json;charset=UTF-8
-        
+
         {
             "wasHelpful": true
         }
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {}
 
 .. http:post:: /reviews/report/review/(int:review_id).json
 
     Reports a review.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /reviews/report/review/10123.json HTTP/1.1
         Host: embed.gog.com
         Content-Type: application/json;charset=UTF-8
-        
+
         {}
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {
@@ -100,19 +100,19 @@ Reviews
     :reqjson int rating: Rating in stars * 10
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /reviews/rate/product/1436869408.json HTTP/1.1
         Host: embed.gog.com
         Content-Type: application/json;charset=UTF-8
-        
+
         {
           "rating": 40
         }
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {}
@@ -120,5 +120,5 @@ Reviews
 .. http:post:: /reviews/add/product/(int:game_id).json
 
     Submits a game review.
-    
+
     TODO

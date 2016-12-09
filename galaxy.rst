@@ -7,22 +7,22 @@ api.gog.com
 .. http:get:: /products/(int:product_id)
 
     Returns information about a product.
-    
+
     :query str expand: Comma separated list of additional sections to request.
-        Possible values: downloads, expanded_dlcs, description, screenshots, 
+        Possible values: downloads, expanded_dlcs, description, screenshots,
         videos, related_products, changelog
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /products/1207658691?expand=downloads,expanded_dlcs,description,screenshots,videos,related_products,changelog HTTP/1.1
         Host: api.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {
           "id": 1207658691,
           "title": "Unreal Tournament 2004 Editor's Choice Edition",
@@ -155,14 +155,14 @@ api.gog.com
     Returns secure url and chunklist for a file.
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /products/1207658691/downlink/installer/en1installer3 HTTP/1.1
         Host: api.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {
@@ -171,9 +171,9 @@ api.gog.com
         }
 
     **Example chunklist**:
-    
+
     .. sourcecode:: xml
-    
+
         <file name="gog_tis_100_2.0.0.3.sh" available="1" notavailablemsg="" md5="8acedf66c0d2986e7dee9af912b7df4f" chunks="4" timestamp="2015-07-30 17:11:12" total_size="36717998">
             <chunk id="0" from="0" to="10485759" method="md5">7e62ce101221ccdae2e9bff5c16ed9e0</chunk>
             <chunk id="1" from="10485760" to="20971519" method="md5">b80960a2546ce647bffea87f85385535</chunk>
@@ -195,23 +195,23 @@ cfg.gog.com
 .. http:get:: /desktop-galaxy-client/config.json
 
     Config for the Galaxy desktop client
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /desktop-galaxy-client/config.json HTTP/1.1
         Host: cfg.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {
           "status" : "online",
           "channel" : "production",
           "talkInterval" : 600,
-          "complainInterval" : 600,  
+          "complainInterval" : 600,
           "timestamp" : 0,
           "end_points" : {
             "files" : "galaxy-client-update.gog.com",
@@ -237,23 +237,23 @@ cfg.gog.com
 .. http:get:: /(str:project)/4/master/files-(str:os).json
 
     Returns the file list for the Galaxy Updater
-    
-    :param project: Name of the application, possible values: 
-        desktop-galaxy-client, desktop-galaxy-commservice, 
+
+    :param project: Name of the application, possible values:
+        desktop-galaxy-client, desktop-galaxy-commservice,
         desktop-galaxy-overlay, desktop-galaxy-peer, desktop-galaxy-updater.
     :type project: str
     :param os: Target OS, possible values: windows, osx
     :type os: str
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /desktop-galaxy-peer/4/master/files-windows.json HTTP/1.1
         Host: cfg.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {
@@ -303,40 +303,40 @@ presence.gog.com
 ----------------
 
 .. http:post:: /users/(int:user_id)/status
-    
+
     Pings the server to mark you as online. Keep in mind that the request
     content is a url-encoded form, not JSON.
-    
+
     :form str version: Version of the Galaxy client.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         POST /users/48628349957132247/status HTTP/1.1
         Host: presence.gog.com
         Content-Type: application/x-www-form-urlencoded
-        
+
         version=1.1.22.11
-    
+
     **Example response**:
-        
+
     No content
-    
+
 
 .. http:delete:: /users/(int:user_id)/status
-    
+
     Marks you as offline.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         DELETE /users/48628349957132247/status HTTP/1.1
         Host: presence.gog.com
-    
+
     **Example response**:
-    
+
     No content
 
 
@@ -348,16 +348,16 @@ users.gog.com
     Returns information about the user
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /users/48628349957132247 HTTP/1.1
         Host: users.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {
           "id": "48628349957132247",
           "username": "Yepoleb",

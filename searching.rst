@@ -6,7 +6,7 @@ Methods used for searching games.
 .. http:get:: /games/ajax/filtered
 
     Searches for **all available** games matching the given criterias.
-    
+
     :query category: Game genre
     :query devpub: Developer or publisher
     :query feature: Game features
@@ -19,16 +19,16 @@ Methods used for searching games.
     :query sort: Sort order
     :query system: OS
     :query limit: Max results
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /games/ajax/filtered?mediaType=game&search=Witcher HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {
@@ -118,14 +118,14 @@ Methods used for searching games.
     :query totalPages: Total Pages
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /account/getFilteredProducts?mediaType=1&search=Shadowrun HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {

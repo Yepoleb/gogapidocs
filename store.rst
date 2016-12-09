@@ -11,11 +11,11 @@ Cart
 .. http:get:: /cart/add/(int:game_id)
 
     Adds a single item to the cart.
-    
+
 .. http:post:: /cart/add
 
     Adds multiple items to the cart.
-    
+
     :reqjson array product_ids: Items to add
 
 .. http:get:: /cart/add/series/(int:series_id)

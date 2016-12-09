@@ -7,18 +7,18 @@ User
 ----
 
 .. http:get:: /userData.json
-    
+
     Information about the logged in user.
-    
+
     .. sourcecode:: http
-    
+
         GET /userData.json HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {
           "country": "AT",
           "currencies": [
@@ -67,19 +67,19 @@ User
 
     Changes the default currency.
 
-    :param currency: One of the available currency codes from 
+    :param currency: One of the available currency codes from
                      :http:get:`/userData.json`
     :type currency: str
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/changeCurrency/EUR HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {}
@@ -87,55 +87,55 @@ User
 .. http:get:: /user/changeLanguage/(str:language)
 
     Changes the used locale.
-    
+
     :param language: Language to use, possible values: en, de, fr, ru, pt
     :type language: str
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/changeLanguage/de HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {}
 
 .. http:get:: /user/set-redirect-url
-    
+
     Sets URL to redirect to after login. You shouldn't need this with a native
     client which is always logged in.
-    
+
     :query url: Redirect URL, the only accepted value seems to be ``checkout``
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/set-redirect-url?url=checkout HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     No content
 
 .. http:get:: /user/reviewTipsStatus.json
 
-    Checks if the user has read the tips that pop up before you can write your 
+    Checks if the user has read the tips that pop up before you can write your
     first review.
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/reviewTipsStatus.json HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {
@@ -146,16 +146,16 @@ User
 .. http:get:: /users/info/(int:user_id)
 
     Returns the public information about a user.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/reviewTipsStatus.json HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {
@@ -190,20 +190,20 @@ Games
 
 
 .. http:get:: /user/data/games.json
-    
+
     List of games the account owns.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/data/games HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {
           "owned": [
             1207658691,
@@ -225,18 +225,18 @@ Games
 .. http:get:: /account/gameDetails/(int:game_id).json
 
     Returns detailed information about a game.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /account/gameDetails/1207658691.json HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {
           "title": "Unreal Tournament 2004 Editor's Choice Edition",
           "backgroundImage": "//images-4.gog.com/ebed1d5546a4fa382d7d36db8aee7f298eac7db3a8dc2f4389120b5b7b3155a9",
@@ -313,20 +313,20 @@ Games
         }
 
 .. http:get:: /user/wishlist.json
-    
+
     Returns the wishlist of the account.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/wishlist.json HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {
           "wishlist": {
             "1207658750": true,
@@ -344,33 +344,33 @@ Games
         }
 
 .. http:get:: /user/wishlist/add/(int:game_id)
-    
+
     Adds a game to the wishlist and returns the new list.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/wishlist/add/1207658750 HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     See :http:get:`/user/wishlist.json`
 
 .. http:get:: /user/wishlist/remove/(int:game_id)
 
     Removes a game from the wishlist and returns the new list.
-    
+
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/wishlist/remove/1207658750 HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     See :http:get:`/user/wishlist.json`
 
 .. http:get:: /user/games_rating.json
@@ -378,14 +378,14 @@ Games
     Returns the game the account has rated. Rating numbers are stars * 10
 
     **Example request**:
-    
+
     .. sourcecode:: http
-    
+
         GET /user/games_rating.json HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
 
         {
@@ -399,18 +399,18 @@ Games
 .. http:get:: /user/review_votes.json
 
     Returns review IDs the user has voted on.
-        
+
     **Example response**:
 
     .. sourcecode:: http
-    
+
         GET /user/review_votes.json HTTP/1.1
         Host: embed.gog.com
-    
+
     **Example response**:
-    
+
     .. sourcecode:: json
-    
+
         {
           "reviews": [
             123456,
