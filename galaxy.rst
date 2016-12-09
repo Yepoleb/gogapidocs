@@ -195,6 +195,88 @@ cfg.gog.com
 .. http:get:: /desktop-galaxy-client/config.json
 
     Config for the Galaxy desktop client
+    
+    **Example request**:
+    
+    .. sourcecode:: http
+    
+        GET /desktop-galaxy-client/config.json HTTP/1.1
+        Host: cfg.gog.com
+    
+    **Example response**:
+    
+    .. sourcecode:: json
+
+        {
+          "status" : "online",
+          "channel" : "production",
+          "talkInterval" : 600,
+          "complainInterval" : 600,  
+          "timestamp" : 0,
+          "end_points" : {
+            "files" : "galaxy-client-update.gog.com",
+            "products" : "products.gog.com",
+            "users" : "users.gog.com",
+            "auth" : "auth.gog.com",
+            "cdn" : "cdn.gog.com",
+            "productsDetails" : "api.gog.com",
+            "gameplay" : "gameplay.gog.com",
+            "gog-api" : "api.gog.com"
+          },
+          "intervals" : {
+            "quick" : 1,
+            "presence" : 5,
+            "short" : 10,
+            "normal" : 60,
+            "selfUpdateCheck" : 360,
+            "long" : 1440,
+            "eternity" : 10080
+          }
+        }
+
+.. http:get:: /(str:project)/4/master/files-(str:os).json
+
+    Returns the file list for the Galaxy Updater
+    
+    :param project: Name of the application, possible values: 
+        desktop-galaxy-client, desktop-galaxy-commservice, 
+        desktop-galaxy-overlay, desktop-galaxy-peer, desktop-galaxy-updater.
+    :type project: str
+    :param os: Target OS, possible values: windows, osx
+    :type os: str
+    
+    **Example request**:
+    
+    .. sourcecode:: http
+    
+        GET /desktop-galaxy-peer/4/master/files-windows.json HTTP/1.1
+        Host: cfg.gog.com
+    
+    **Example response**:
+    
+    .. sourcecode:: json
+
+        {
+          "baseURI": "https://galaxy-client-update.gog.com",
+          "files": [
+            {
+              "hash": "cb1e2b55abc8fac1ce0dd83477a25109",
+              "path": "peer/msvc-15/GalaxyPeer.dll",
+              "resource": "GalaxyPeer/86194099/windows/peer/msvc-15/GalaxyPeer.dll.zip",
+              "size": 2223179
+            },
+            {
+              "hash": "72c2cbd0aff710a34c91596337767675",
+              "path": "peer/msvc-15/GalaxyPeer64.dll",
+              "resource": "GalaxyPeer/86194099/windows/peer/msvc-15/GalaxyPeer64.dll.zip",
+              "size": 3090331
+            }
+          ],
+          "projectName": "GalaxyPeer",
+          "symlinks": [],
+          "timestamp": "86194099",
+          "version": "0.0.0.676"
+        }
 
 
 chat.gog.com
@@ -221,6 +303,41 @@ presence.gog.com
 ----------------
 
 .. http:post:: /users/(int:user_id)/status
+    
+    Pings the server to mark you as online. Keep in mind that the request
+    content is a url-encoded form, not JSON.
+    
+    :form str version: Version of the Galaxy client.
+    
+    **Example request**:
+    
+    .. sourcecode:: http
+    
+        POST /users/48628349957132247/status HTTP/1.1
+        Host: presence.gog.com
+        Content-Type: application/x-www-form-urlencoded
+        
+        version=1.1.22.11
+    
+    **Example response**:
+        
+    No content
+    
+
+.. http:delete:: /users/(int:user_id)/status
+    
+    Marks you as offline.
+    
+    **Example request**:
+    
+    .. sourcecode:: http
+    
+        DELETE /users/48628349957132247/status HTTP/1.1
+        Host: presence.gog.com
+    
+    **Example response**:
+    
+    No content
 
 
 users.gog.com
@@ -229,3 +346,33 @@ users.gog.com
 .. http:get:: /users/(int:user_id)
 
     Returns information about the user
+
+    **Example request**:
+    
+    .. sourcecode:: http
+    
+        GET /users/48628349957132247 HTTP/1.1
+        Host: users.gog.com
+    
+    **Example response**:
+    
+    .. sourcecode:: json
+    
+        {
+          "id": "48628349957132247",
+          "username": "Yepoleb",
+          "created_date": "2015-12-04T14:02:42+00:00",
+          "avatar": {
+            "gog_image_id": "3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d",
+            "small": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_avs.jpg",
+            "small_2x": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_avs2.jpg",
+            "medium": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_avm.jpg",
+            "medium_2x": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_avm2.jpg",
+            "large": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_avl.jpg",
+            "large_2x": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_avl2.jpg",
+            "sdk_img_32": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_sdk_img32.jpg",
+            "sdk_img_64": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_sdk_img64.jpg",
+            "sdk_img_184": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_sdk_img184.jpg"
+          },
+          "is_employee": false
+        }
