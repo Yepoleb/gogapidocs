@@ -307,7 +307,7 @@ presence.gog.com
     Pings the server to mark you as online. Keep in mind that the request
     content is a url-encoded form, not JSON.
 
-    :form str version: Version of the Galaxy client.
+    :form version: Version of the Galaxy client.
 
     **Example request**:
 
