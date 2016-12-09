@@ -59,6 +59,7 @@ Reviews
     
         POST /reviews/vote/review/1234567.json HTTP/1.1
         Host: embed.gog.com
+        Content-Type: application/json;charset=UTF-8
         
         {
             "wasHelpful": true
@@ -80,6 +81,7 @@ Reviews
     
         GET /reviews/report/review/10123.json HTTP/1.1
         Host: embed.gog.com
+        Content-Type: application/json;charset=UTF-8
         
         {}
     
@@ -103,6 +105,7 @@ Reviews
     
         GET /reviews/rate/product/1436869408.json HTTP/1.1
         Host: embed.gog.com
+        Content-Type: application/json;charset=UTF-8
         
         {
           "rating": 40
