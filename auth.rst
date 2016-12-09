@@ -31,7 +31,7 @@ Auth-Flow
 Authorizing a Request
 ---------------------
 
-To authorize a request set the `Authorization` header to `Bearer <token>`. This
+To authorize a request set the ``Authorization`` header to ``Bearer <token>``. This
 has to be done for each call.
 
 **Example request**:
@@ -50,11 +50,11 @@ Methods
     Redirects to the login site. Don't use this directly from your client, it's
     not a JSON API, visit it with a web browser instead.
 
-    :query str client_id: OAuth2 Client ID. Use 46899977096215655 until we know
+    :query str client_id: OAuth2 Client ID. Use ``46899977096215655`` until we know
         how to get our own IDs.
     :query str redirect_id: Your redirect url that will receive the login code.
-    :query str response_type: Use `code`
-    :query str layout: Use `client2`
+    :query str response_type: Use ``code``
+    :query str layout: Use ``client2``
 
     **Example request**:
     
@@ -65,19 +65,21 @@ Methods
 
     **Example redirect**:
     
-    http://localhost:8000/token?code=oF8OSgZVMFb7a8Y3Dolrz4YPqDUnG7TCTsekYKcWnFNcmWWCJH7XJS3RN9d9NB0slx4FS1kss-llBEXvgkCX8oNTP1u3yYG1p56f35jVZCclrCQMk803k5LmQLKM1Wb7
+    .. sourcecode:: none
+    
+        http://localhost:8000/token?code=oF8OSgZVMFb7a8Y3Dolrz4YPqDUnG7TCTsekYKcWnFNcmWWCJH7XJS3RN9d9NB0slx4FS1kss-llBEXvgkCX8oNTP1u3yYG1p56f35jVZCclrCQMk803k5LmQLKM1Wb7
 
 .. http:get:: /token
 
     Generates a new auth token from a login code or refreshes an old one.
 
     :query str client_id:
-        OAuth2 client ID. Use 46899977096215655
+        OAuth2 client ID. Use ``46899977096215655``
     :query str client_secret:
         OAuth2 secret. Use 
-        `9d85c43b1482497dbbce61f6e4aa173a433796eeae2ca8c5f6129f2dc4de46d9`.
+        ``9d85c43b1482497dbbce61f6e4aa173a433796eeae2ca8c5f6129f2dc4de46d9``
     :query str grant_type:
-        `authorization_code` for new logins, `refresh_token` for refreshs.
+        ``authorization_code`` for new logins, ``refresh_token`` for refreshs.
     :query str code:
         **Only for new logins:** Login code you got from the auth redirect.
     :query str redirect_uri:
