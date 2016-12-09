@@ -1,0 +1,5 @@
+pre {
+  overflow: auto;
+  overflow-y: auto;
+  max-height: 32em;
+}
