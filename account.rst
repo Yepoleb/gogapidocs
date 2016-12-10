@@ -147,11 +147,14 @@ User
 
     Returns the public information about a user.
 
+    :query str expand: Additional sections to request. Possible values:
+        friendStatus, wishlistStatus, blockedStatus
+
     **Example request**:
 
     .. sourcecode:: http
 
-        GET /user/reviewTipsStatus.json HTTP/1.1
+        GET /users/info/48628349971017?expand=friendStatus,wishlistStatus,blockedStatus HTTP/1.1
         Host: embed.gog.com
 
     **Example response**:
@@ -170,17 +173,30 @@ User
             "large": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_avl.jpg",
             "large2x": "https://images.gog.com/3f9e109ac09308f7d52c607c8571e63d5fb482acca499a83e767dfff7f00d57d_avl2.jpg"
           },
+          "friendStatus": {
+            "id": "48628349971017",
+            "status": 0,
+            "dateCreated": null,
+            "dateAccepted": null
+          },
+          "wishlistStatus": {
+            "sharing": 2,
+            "url": "https://embed.gog.com/u/Yepoleb/wishlist"
+          },
+          "blockedStatus": {
+            "blocked": false
+          },
           "chatStatus": {
             "url": "https://embed.gog.com/u/Yepoleb/chat",
             "isChatRestricted": false
           }
         }
 
-.. http:get:: /user/(int:user_id)/block
+.. http:get:: /users/(int:user_id)/block
 
     TODO
 
-.. http:get:: /user/(int:user_id)/unblock
+.. http:get:: /users/(int:user_id)/unblock
 
     TODO
 

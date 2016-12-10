@@ -234,7 +234,7 @@ cfg.gog.com
           }
         }
 
-.. http:get:: /(str:project)/4/master/files-(str:os).json
+.. http:get:: /(str:project)/4/master/(str:os).json
 
     Returns the file list for the Galaxy Updater
 
@@ -242,7 +242,7 @@ cfg.gog.com
         desktop-galaxy-client, desktop-galaxy-commservice,
         desktop-galaxy-overlay, desktop-galaxy-peer, desktop-galaxy-updater.
     :type project: str
-    :param os: Target OS, possible values: windows, osx
+    :param os: Target OS, possible values: files-windows, files-osx
     :type os: str
 
     **Example request**:
@@ -291,6 +291,47 @@ gameplay.gog.com
 ----------------
 
 .. http:get:: /clients/(int:product_id)/users/(int:user_id)/achievements
+
+    Gets the achievements list for a product.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /clients/1437060567/users/48628349957132247/achievements HTTP/1.1
+        Host: gameplay.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "total_count": 40,
+          "limit": 1000,
+          "page_token": "0",
+          "items": [
+            {
+              "achievement_id": "48497841707623054",
+              "achievement_key": "ACHIEVEMENT_NODEATH1",
+              "visible": true,
+              "name": "Early Bird",
+              "description": "Complete level 1 «after a long night» without dying",
+              "image_url_unlocked": "https://images.gog.com/296efc79b94a252a68dcd4b3b073b94307930b160603b2083f2dcddb68353c1e_gac_60.jpg",
+              "image_url_locked": "https://images.gog.com/3af2d24d7c71bc7a36f69b16c2bdee9daa6fddb285ca2b02c0834e28ee669462_gac_60.jpg",
+              "date_unlocked": null
+            },
+            {
+              "achievement_id": "48225958150521213",
+              "achievement_key": "ACHIEVE_AVALANCHE",
+              "visible": true,
+              "name": "Run like hell",
+              "description": "Escape the collapsing mine without being crushed",
+              "image_url_unlocked": "https://images.gog.com/0c541a40fb04294dfca5b91a659217175bffcce1f13b4c8f875ac562b3c65f8c_gac_60.jpg",
+              "image_url_locked": "https://images.gog.com/e53817dce9e0a8f04b180999da9900b238217a9a4c0673d2848bc724c3698921_gac_60.jpg",
+              "date_unlocked": null
+            }
+          ]
+        }
 
 .. http:get:: /clients/(int:product_id)/users/(int:user_id)/sessions
 
