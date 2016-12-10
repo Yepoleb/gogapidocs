@@ -23,4 +23,4 @@ Links
 
 * `Source pages <https://github.com/Yepoleb/gogapidocs>`_
 * `My Python implementation <https://github.com/Yepoleb/pygogapi>`_
-* `GOG Downloader Documentation <https://sites.google.com/site/gogdownloader/GOG%20API%20Documentation.pdf>`_
+* `GOG Downloader Documentation by Sude <https://sites.google.com/site/gogdownloader/GOG%20API%20Documentation.pdf>`_
