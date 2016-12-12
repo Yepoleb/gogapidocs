@@ -220,13 +220,12 @@ User
     TODO
 
 
-Games
------
+Games & Movies
+--------------
 
+.. http:get:: /user/data/games
 
-.. http:get:: /user/data/games.json
-
-    List of games the account owns.
+    List of games and movies the account owns.
 
     **Example request**:
 
@@ -259,7 +258,8 @@ Games
 
 .. http:get:: /account/gameDetails/(int:game_id).json
 
-    Returns detailed information about a game.
+    Returns detailed information about a game. Seems to work with movies as
+    well, but they have their own method.
 
     **Example request**:
 
@@ -343,6 +343,94 @@ Games
           "messages": [],
           "changelog": null,
           "forumLink": "https://embed.gog.com/forum/unreal_series",
+          "isBaseProductMissing": false,
+          "missingBaseProduct": null
+        }
+
+.. http:get:: /account/movieDetails/(int:game_id).json
+
+    Returns detailed information about a movie.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /account/movieDetails/1207665463.json HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "title": "Art of Playing, The",
+          "backgroundImage": "//images-1.gog.com/a3e48e4e370e2e7e9cdf648b712ff0506b994b404b64993e3fab4934294a4890",
+          "cdKey": "",
+          "textInformation": "",
+          "downloads": [
+            {
+              "manualUrl": "/downlink/the_art_of_playing/en1video1",
+              "downloaderUrl": "gogdownloader://the_art_of_playing/video_en1video1",
+              "playerUrl": "http://www.gog.com/video/the_art_of_playing/en1video1",
+              "name": "The Art of Playing (1080p)",
+              "size": "1.1 GB"
+            },
+            {
+              "manualUrl": "/downlink/the_art_of_playing/en1video2",
+              "downloaderUrl": "gogdownloader://the_art_of_playing/video_en1video2",
+              "playerUrl": "http://www.gog.com/video/the_art_of_playing/en1video2",
+              "name": "The Art of Playing (720p)",
+              "size": "382 MB"
+            },
+            {
+              "manualUrl": "/downlink/the_art_of_playing/en1video3",
+              "downloaderUrl": "gogdownloader://the_art_of_playing/video_en1video3",
+              "playerUrl": "http://www.gog.com/video/the_art_of_playing/en1video3",
+              "name": "The Art of Playing (576p)",
+              "size": "163 MB"
+            }
+          ],
+          "extras": [
+            {
+              "manualUrl": "/downlink/file/the_art_of_playing/34143",
+              "downloaderUrl": "gogdownloader://the_art_of_playing/34143",
+              "name": "wallpaper",
+              "type": "wallpapers",
+              "info": 1,
+              "size": "1 MB"
+            },
+            {
+              "manualUrl": "/downlink/file/the_art_of_playing/34213",
+              "downloaderUrl": "gogdownloader://the_art_of_playing/34213",
+              "name": "trailer",
+              "type": "video",
+              "info": 1,
+              "size": "92 MB"
+            },
+            {
+              "manualUrl": "/downlink/file/the_art_of_playing/34553",
+              "downloaderUrl": "gogdownloader://the_art_of_playing/34553",
+              "name": "subtitles (English)",
+              "type": "game add-ons",
+              "info": 1,
+              "size": "1 MB"
+            },
+            {
+              "manualUrl": "/downlink/file/the_art_of_playing/37973",
+              "downloaderUrl": "gogdownloader://the_art_of_playing/37973",
+              "name": "subtitle pack",
+              "type": "game add-ons",
+              "info": 1,
+              "size": "1 MB"
+            }
+          ],
+          "dlcs": [],
+          "tags": [],
+          "isPreOrder": false,
+          "releaseTimestamp": 693612000,
+          "messages": [],
+          "changelog": null,
+          "forumLink": "https://www.gog.com/forum/movies",
           "isBaseProductMissing": false,
           "missingBaseProduct": null
         }
