@@ -381,8 +381,9 @@ presence.gog.com
 
 .. http:post:: /users/(int:user_id)/status
 
-    Pings the server to mark you as online. Keep in mind that the request
-    content is a url-encoded form, not JSON.
+    Pings the server to mark you as online. Should be refreshed every 5
+    minutes. Keep in mind that the request content is a url-encoded form, not
+    JSON.
 
     :form version: Version of the Galaxy client.
 
@@ -415,6 +416,66 @@ presence.gog.com
     **Example response**:
 
     No content
+
+.. http:options:: /statuses
+
+    No idea what this does, but the official client uses it every time before
+    doing the GET request. Reponse doesn't contain any items.
+
+    :query str user_id: Comma separated list of user IDs to check the
+        status of.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        OPTIONS /statuses?user_id=46988961654682898,46988886297334688,47510856674996320 HTTP/1.1
+        Host: presence.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "items": [],
+          "limit": 250,
+          "total_count": 0
+        }
+
+.. http:get:: /statuses
+
+    Returns the users who are online at the moment.
+
+    :query str user_id: Comma separated list of user IDs to check the
+        status of.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /statuses?user_id=46988961654682898,46988886297334688,47510856674996320 HTTP/1.1
+        Host: presence.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "total_count": 2,
+          "limit": 250,
+          "items": [
+            {
+              "data": {},
+              "client_id": "46755278331571209",
+              "user_id": "46988961654682898"
+            },
+            {
+              "data": {},
+              "client_id": "46755278331571209",
+              "user_id": "46988886297334688"
+            }
+          ]
+        }
 
 
 users.gog.com
