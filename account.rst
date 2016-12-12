@@ -150,6 +150,25 @@ User
     :query str expand: Additional sections to request. Possible values:
         friendStatus, wishlistStatus, blockedStatus
 
+    :resjson int friendStatus.status:
+
+        * ANONYMOUS_USER = 0: No special relationship with this user.
+        * INVITED_USER = 1: You have sent this user a friend request.
+        * INVITED_BY_USER = 2: You have received a friend request from this user.
+        * FRIEND = 3: You are friends with this user.
+
+    :resjson int friendStatus.dateCreated: Timestamp of when a friend request
+        was sent or ``null``.
+
+    :resjson int friendStatus.dateAccepted: Timestamp of when a friend request
+        was accepted or ``null``.
+
+    :resjson int wishlistStatus.sharing:
+
+        * WISHLIST_PRIVATE = 0
+        * WISHLIST_PUBLIC = 1
+        * WISHLIST_FOR_FRIENDS = 2
+
     **Example request**:
 
     .. sourcecode:: http
