@@ -1,11 +1,13 @@
 Searching
 =========
 
-Methods used for searching games.
+Methods used for searching games and movies.
 
 .. http:get:: /games/ajax/filtered
 
-    Searches for **all available** games matching the given criterias.
+    Searches for **all available** products matching the given criterias.
+    Movies don't support the parameters category, devpub, feature, release,
+    system.
 
     :query category: Game genre
     :query devpub: Developer or publisher
@@ -103,11 +105,12 @@ Methods used for searching games.
 
 .. http:get:: /account/getFilteredProducts
 
-    Searches for games **owned by the user** matching the given criterias.
+    Searches for products **owned by the user** matching the given criterias.
+    Movies don't support the parameters category, feature, system.
 
     :query category: Genre
     :query feature: Feature
-    :query hiddenFlag: Show hidden games
+    :query hiddenFlag: Show hidden products
     :query language: Language
     :query mediaType: Game or movie
     :query page: Page number
@@ -202,3 +205,16 @@ Methods used for searching games.
           },
           "hasHiddenProducts": false
         }
+
+.. http:get:: /account/wishlist/search
+
+    Searches for games in the wishlist. Works the same as
+    :http:get:`/account/getFilteredProducts`, but adds a price and removes the
+    tags filter.
+
+    :query int price: Price range of the product
+
+.. http:get:: /public_wishlist/(int:user_id)/search
+
+    Searches for games in the wishlist of a different user. Works the same as
+    :http:get:`/account/wishlist/search`.
