@@ -347,7 +347,7 @@ Games & Movies
           "missingBaseProduct": null
         }
 
-.. http:get:: /account/movieDetails/(int:game_id).json
+.. http:get:: /account/movieDetails/(int:movie_id).json
 
     Returns detailed information about a movie.
 
@@ -466,9 +466,9 @@ Games & Movies
           "checksum": "e7c70b9b758318ed2f08b4450272296c"
         }
 
-.. http:get:: /user/wishlist/add/(int:game_id)
+.. http:get:: /user/wishlist/add/(int:product_id)
 
-    Adds a game to the wishlist and returns the new list.
+    Adds a product to the wishlist and returns the new list.
 
     **Example request**:
 
@@ -481,9 +481,9 @@ Games & Movies
 
     See :http:get:`/user/wishlist.json`
 
-.. http:get:: /user/wishlist/remove/(int:game_id)
+.. http:get:: /user/wishlist/remove/(int:product_id)
 
-    Removes a game from the wishlist and returns the new list.
+    Removes a product from the wishlist and returns the new list.
 
     **Example request**:
 
@@ -498,7 +498,7 @@ Games & Movies
 
 .. http:get:: /user/games_rating.json
 
-    Returns the game the account has rated. Rating numbers are stars * 10
+    Returns the products the account has rated. Rating numbers are stars * 10
 
     **Example request**:
 
