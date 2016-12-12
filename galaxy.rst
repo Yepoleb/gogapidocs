@@ -420,7 +420,7 @@ presence.gog.com
 .. http:options:: /statuses
 
     No idea what this does, but the official client uses it every time before
-    doing the GET request. Reponse doesn't contain any items.
+    doing the GET request. Reponse never contains any items.
 
     :query str user_id: Comma separated list of user IDs to check the
         status of.

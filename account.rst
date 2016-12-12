@@ -63,47 +63,6 @@ User
           "personalizedSeriesPrices": []
         }
 
-.. http:get:: /user/changeCurrency/(str:currency)
-
-    Changes the default currency.
-
-    :param currency: One of the available currency codes from
-                     :http:get:`/userData.json`
-    :type currency: str
-
-    **Example request**:
-
-    .. sourcecode:: http
-
-        GET /user/changeCurrency/EUR HTTP/1.1
-        Host: embed.gog.com
-
-    **Example response**:
-
-    .. sourcecode:: json
-
-        {}
-
-.. http:get:: /user/changeLanguage/(str:language)
-
-    Changes the used locale.
-
-    :param language: Language to use, possible values: en, de, fr, ru, pt
-    :type language: str
-
-    **Example request**:
-
-    .. sourcecode:: http
-
-        GET /user/changeLanguage/de HTTP/1.1
-        Host: embed.gog.com
-
-    **Example response**:
-
-    .. sourcecode:: json
-
-        {}
-
 .. http:get:: /user/set-redirect-url
 
     Sets URL to redirect to after login. You shouldn't need this with a native
@@ -435,6 +394,64 @@ Games & Movies
           "missingBaseProduct": null
         }
 
+.. http:get:: /user/games_rating.json
+
+    Returns the products the account has rated. Rating numbers are stars * 10
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /user/games_rating.json HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "games_rating": {
+            "1207658957": 40,
+            "1207659032": 50
+          },
+          "checksum": "175d07086bff9322646f1dad2749483e"
+        }
+
+.. http:get:: /user/review_votes.json
+
+    Returns review IDs the user has voted on.
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        GET /user/review_votes.json HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "reviews": [
+            123456,
+            1112223
+          ],
+          "checksum": "76c03aa67251e46db3271adf4641b815"
+        }
+
+.. http:any:: /account/hideProduct/(int:product_id)
+
+    Hides a product from your library.
+
+.. http:any:: /account/revealProduct/(int:product_id)
+
+    Unhides a product from your library.
+
+
+Wishlist
+--------
+
 .. http:get:: /user/wishlist.json
 
     Returns the wishlist of the account.
@@ -496,67 +513,117 @@ Games & Movies
 
     See :http:get:`/user/wishlist.json`
 
-.. http:get:: /user/games_rating.json
 
-    Returns the products the account has rated. Rating numbers are stars * 10
+Tags
+----
+
+.. http:any:: /account/tags/add
+
+.. http:any:: /account/tags/attach
+
+.. http:any:: /account/tags/detach
+
+.. http:any:: /account/tags/delete
+
+.. http:any:: /account/tags/update
+
+
+Settings
+--------
+
+.. http:any:: /account/save_birthday/(birthday)
+
+.. http:any:: /account/save_country/(country)
+
+.. http:any:: /account/save_newsletter_subscription/(bool:subscribe)
+
+.. http:any:: /account/save_promo_subscription/(bool:subscribe)
+
+.. http:any:: /account/save_wishlist_notification/(bool:subscribe)
+
+.. http:any:: /account/save_pm/(bool:receive)
+
+.. http:any:: /account/save_sharing_wishlist/(share)
+
+.. http:any:: /account/save_chat_privacy/(private)
+
+.. http:any:: /account/save_search_privacy/(bool:private)
+
+.. http:any:: /account/logout_all_sessions
+
+.. http:any:: /account/settings/cards/(card)
+
+.. http:get:: /user/changeCurrency/(str:currency)
+
+    Changes the default currency.
+
+    :param currency: One of the available currency codes from
+                     :http:get:`/userData.json`
+    :type currency: str
 
     **Example request**:
 
     .. sourcecode:: http
 
-        GET /user/games_rating.json HTTP/1.1
+        GET /user/changeCurrency/EUR HTTP/1.1
         Host: embed.gog.com
 
     **Example response**:
 
     .. sourcecode:: json
 
-        {
-          "games_rating": {
-            "1207658957": 40,
-            "1207659032": 50
-          },
-          "checksum": "175d07086bff9322646f1dad2749483e"
-        }
+        {}
 
-.. http:get:: /user/review_votes.json
+.. http:get:: /user/changeLanguage/(str:language)
 
-    Returns review IDs the user has voted on.
+    Changes the used locale.
+
+    :param language: Language to use, possible values: en, de, fr, ru, pt
+    :type language: str
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /user/changeLanguage/de HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
+
+.. http:post:: /account/save_shelf_background/(str:background_name)
+
+    Sets the library shelf style.
+
+    :param background_name: One of wood, mate_black, glass, chrome, white,
+        piano_black.
+    :type background_name: str
 
     **Example response**:
 
     .. sourcecode:: http
 
-        GET /user/review_votes.json HTTP/1.1
+        GET /account/save_shelf_background/glass HTTP/1.1
         Host: embed.gog.com
 
     **Example response**:
 
     .. sourcecode:: json
 
-        {
-          "reviews": [
-            123456,
-            1112223
-          ],
-          "checksum": "76c03aa67251e46db3271adf4641b815"
-        }
+        {}
 
 Friends
 -------
 
-.. http:get:: /friends/remove/(int:user_id)
+.. http:any:: /friends/search
 
-    TODO
+.. http:get:: /friends/remove/(int:user_id)
 
 .. http:get:: /friends/invite/(int:user_id)
 
-    TODO
-
 .. http:get:: /friends/invites/(int:user_id)/accept
 
-    TODO
-
 .. http:get:: /friends/invites/(int:user_id)/decline
-
-    TODO
