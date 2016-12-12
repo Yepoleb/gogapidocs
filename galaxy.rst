@@ -284,6 +284,42 @@ chat.gog.com
 
 .. http:get:: /users/(int:user_id)/friends
 
+    Returns the list of friends.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /users/48628349957132247/friends HTTP/1.1
+        Host: chat.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "items": [
+            {
+              "user_id": "46988961654682898",
+              "username": "adaliabooks",
+              "is_employee": false,
+              "images": {
+                "medium": "https://images.gog.com/fc8ebd082c233822f091875ad36c1102a4a7d58be19b73e72c997de681aa40f1_avm.jpg",
+                "medium_2x": "https://images.gog.com/fc8ebd082c233822f091875ad36c1102a4a7d58be19b73e72c997de681aa40f1_avm2.jpg"
+              }
+            },
+            {
+              "user_id": "47510856674996320",
+              "username": "vidsgame",
+              "is_employee": false,
+              "images": {
+                "medium": "https://images.gog.com/4c208a9ee4766deaafce3189ab5c3afea54e85332efed1b3c563dc9954d70a8f_avm.jpg",
+                "medium_2x": "https://images.gog.com/4c208a9ee4766deaafce3189ab5c3afea54e85332efed1b3c563dc9954d70a8f_avm2.jpg"
+              }
+            }
+          ]
+        }
+
 .. http:get:: /users/(int:user_id)/invitations
 
 
