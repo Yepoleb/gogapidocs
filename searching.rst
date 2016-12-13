@@ -1,7 +1,9 @@
 Searching
 =========
 
-Methods used for searching games and movies.
+Endpoints used for searching games and movies. Contrary to their names, they
+don't actually need to filter anything and can be used to simply get a list
+of all your games.
 
 .. http:get:: /games/ajax/filtered
 
