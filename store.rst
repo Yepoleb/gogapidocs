@@ -80,8 +80,8 @@ Wallet
 
     Creates an order to add wallet funds.
 
-    :jsonreq int amount: Amount of money to add in cents
-    :jsonreq str currency: Currency code
+    :reqjson int amount: Amount of money to add in cents
+    :reqjson str currency: Currency code
 
     **Example request**:
 
