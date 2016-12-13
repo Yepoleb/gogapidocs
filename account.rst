@@ -184,7 +184,8 @@ Games & Movies
 
 .. http:get:: /user/data/games
 
-    List of games and movies the account owns.
+    List of games and movies the account owns. Use
+    :http:get:`/account/getFilteredProducts` for more than just the IDs.
 
     **Example request**:
 
