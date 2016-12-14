@@ -16,8 +16,9 @@ Contents
    searching
    store
    reviews
-   galaxy
    connect
+   galaxy
+   gameslist
 
 Links
 -----
