@@ -323,6 +323,162 @@ chat.gog.com
 .. http:get:: /users/(int:user_id)/invitations
 
 
+content-system.gog.com
+----------------------
+
+.. http:get:: /products/(int:product_id)/os/(str:os)/builds?generation=2
+
+    Returns the available builds for a game.
+
+    :param os: Game OS. Possible values: windows, osx.
+    :type os: str
+    :query int generation: Max manifest version. Can be 1 or 2.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /products/1207658930/os/windows/builds?generation=2 HTTP/1.1
+        Host: content-system.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "total_count": 2,
+          "count": 2,
+          "items": [
+            {
+              "build_id": "48906206523382029",
+              "product_id": "1207658930",
+              "os": "windows",
+              "branch": null,
+              "version_name": "3.5.0.26",
+              "tags": [],
+              "public": true,
+              "date_published": "2016-03-09T10:16:11+0000",
+              "generation": 2,
+              "link": "https://cdn.gog.com/content-system/v2/meta/92/ab/92ab42631ff4742b309bb62c175e6306"
+            },
+            {
+              "build_id": "3161",
+              "product_id": "1207658930",
+              "os": "windows",
+              "branch": null,
+              "version_name": "",
+              "tags": [],
+              "public": true,
+              "date_published": "2015-05-12T09:21:36+0000",
+              "generation": 1,
+              "link": "https://cdn.gog.com/content-system/v1/manifests/1207658930/windows/37794096/repository.json",
+              "legacy_build_id": 37794096
+            }
+          ],
+          "has_private_branches": false
+        }
+
+
+cdn.gog.com
+-----------
+
+.. http:get:: /content-system/v1/manifests/(int:product_id)/(str:os)/(int:build_id)/repository.json
+
+    TODO
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /content-system/v1/manifests/1207658930/windows/37794096/repository.json HTTP/1.1
+        Host: cdn.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "product": {
+            "timestamp": 37794096,
+            "depots": [
+              {
+                "languages": [
+                  "Neutral"
+                ],
+                "size": "1255672",
+                "gameIDs": [
+                  "1207658930"
+                ],
+                "systems": [
+                  "Windows"
+                ],
+                "manifest": "a0e35d92-2a0f-40db-8a47-47cbbad0bac0.json"
+              },
+              {
+                "languages": [
+                  "English"
+                ],
+                "size": "24450928280",
+                "gameIDs": [
+                  "1207658930"
+                ],
+                "systems": [
+                  "Windows"
+                ],
+                "manifest": "463cd4b2-783e-447a-b17e-a68d601911e3.json"
+              },
+              {
+                "redist": "MSVC2010",
+                "executable": "__redist/MSVC2010/vcredist_x86.exe",
+                "argument": "/q",
+                "size": "0"
+              },
+              {
+                "redist": "dotNet4",
+                "executable": "__redist/dotNet4/dotNetFx40_Full_x86_x64.exe",
+                "argument": "/q /norestart",
+                "size": "0"
+              },
+              {
+                "redist": "DirectX",
+                "executable": "__redist/DirectX/DXSETUP.exe",
+                "argument": "/silent",
+                "size": "0"
+              }
+            ],
+            "support_commands": [
+              {
+                "languages": [
+                  "Neutral"
+                ],
+                "executable": "/galaxy_the_witcher2_ee_3.5.0.26.exe",
+                "gameID": "1207658930",
+                "systems": [
+                  "Windows"
+                ],
+                "argument": ""
+              }
+            ],
+            "installDirectory": "The Witcher 2",
+            "rootGameID": "1207658930",
+            "gameIDs": [
+              {
+                "dependencies": [],
+                "gameID": "1207658930",
+                "name": {
+                  "en": "The Witcher 2 - Assassins of Kings Enhanced Edition"
+                },
+                "standalone": true
+              }
+            ],
+            "projectName": "The Witcher 2 - Assassins of Kings Enhanced Edition"
+          },
+          "version": 1
+        }
+
+.. http:get:: /content-system/v2/meta/(str:hash)
+
+
 gameplay.gog.com
 ----------------
 
