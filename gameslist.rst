@@ -1,6 +1,10 @@
 Game ID List
 ============
 
+List of game's names and their corresponding catalog IDs. Be aware that they
+sometimes don't match up with the library IDs. **For debugging purposes only,
+do not hardcode this list into your client!**
+
 +----------------------------------------------------------------+------------+
 | Game Name                                                      | ID         |
 +================================================================+============+
