@@ -150,6 +150,20 @@ api.gog.com
           "changelog": null
         }
 
+.. http:get:: /products
+
+    Same as :http:get:`/products/(int:product_id)`, but supports multiple
+    products per request. Results are returned as an array.
+
+    :query str ids: Comma separated product IDs.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET products?ids=1444036272%2C1444035366 HTTP/1.1
+        Host: api.gog.com
+
 .. http:get:: /products/(int:product_id)/(str:dl_url)
 
     Returns secure url and chunklist for a file.
@@ -476,7 +490,180 @@ cdn.gog.com
           "version": 1
         }
 
+.. http:get:: /content-system/v1/manifests/(int:product_id)/(str:os)/(int:build_id)/(str:manifest_id).json
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /content-system/v1/manifests/1207658930/windows/37794096/463cd4b2-783e-447a-b17e-a68d601911e3.json HTTP/1.1
+        Host: cdn.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "version": 1,
+          "depot": {
+            "name": "The Witcher 2 - Assassins of Kings Enhanced Edition",
+            "files": [
+              {
+                "url": "1207658930/main.bin",
+                "size": 128,
+                "hash": "4d1daf474729e889b878b9bdef634f76",
+                "path": "/CookedPC/dlc_finishers.dzip",
+                "offset": 13944149457
+              },
+              {
+                "url": "1207658930/main.bin",
+                "size": 262,
+                "hash": "3d1be6f328329f983075c124a00aca56",
+                "path": "/Launcher/Neutral/textbox_thumb_normal.PNG",
+                "offset": 24440333403
+              },
+              {
+                "url": "1207658930/main.bin",
+                "size": 417,
+                "hash": "1ebd6e11f384c2d10c936155afbcfa13",
+                "path": "/Launcher/Neutral/textbox_arrow_pressed.PNG",
+                "offset": 24439929797
+              }
+            ]
+          }
+        }
+
 .. http:get:: /content-system/v2/meta/(str:hash)
+
+    Content-System V2 responses are zlib encoded (window size 15).
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /content-system/v2/meta/92/ab/92ab42631ff4742b309bb62c175e6306 HTTP/1.1
+        Host: cdn.gog.com
+
+    **Example repository response**:
+
+    .. sourcecode:: json
+
+        {
+          "baseProductId": "1207658930",
+          "dependencies": [
+            "MSVC2010",
+            "MSVC2010_x64",
+            "DirectX",
+            "dotNet4"
+          ],
+          "depots": [
+            {
+              "languages": [
+                "*",
+                "en"
+              ],
+              "manifest": "79a1f5fd67f6d0cda22c51f1bd706b31",
+              "productId": "1207658930",
+              "size": 492
+            },
+            {
+              "languages": [
+                "en"
+              ],
+              "manifest": "32eee2cc5e7da11f22de078eac90ba60",
+              "productId": "1207658930",
+              "size": 24452205574
+            }
+          ],
+          "installDirectory": "The Witcher 2",
+          "offlineDepot": {
+            "languages": [
+              "*"
+            ],
+            "manifest": "d1e0f516a5ca1eae591c5969c5044f0f",
+            "productId": "1207658930",
+            "size": 3046
+          },
+          "platform": "windows",
+          "products": [
+            {
+              "name": "The Witcher 2 - Assassins of Kings Enhanced Edition",
+              "productId": "1207658930",
+              "script": "goggame-1207658930.script",
+              "temp_arguments": "",
+              "temp_executable": "galaxy_the_witcher2_ee_3.5.0.26.exe"
+            }
+          ],
+          "version": 2
+        }
+
+    **Example depot response**:
+
+    .. sourcecode:: json
+
+        {
+          "depot": {
+            "items": [
+              {
+                "chunks": [
+                  {
+                    "compressedMd5": "2e0dc2f5707ec0d88d570240ba918bb2",
+                    "compressedSize": 9507293,
+                    "md5": "b013bcdcb851922f7e3357fd7b1828ed",
+                    "size": 10485760
+                  },
+                  {
+                    "compressedMd5": "a7e5eff7ef78707d2d059c724fa3dc8f",
+                    "compressedSize": 9617323,
+                    "md5": "2b49c180539c7e188cd58e99b1b13f2d",
+                    "size": 10485760
+                  },
+                  {
+                    "compressedMd5": "a47d292fc498f740677e640146ad2097",
+                    "compressedSize": 14655939,
+                    "md5": "c0a2bcb478957dd77d4eec9240f22d4f",
+                    "size": 18954814
+                  }
+                ],
+                "md5": "7da354ae24cee72ee8ef64c42944f530",
+                "path": "CookedPC\\pack0.dzip",
+                "type": "DepotFile"
+              },
+              {
+                "chunks": [
+                  {
+                    "compressedMd5": "f149b52a4ce1d025bbae57e8f8f7f662",
+                    "compressedSize": 351,
+                    "md5": "53318eac2bcdac67c84dfde40e58006d",
+                    "size": 1024
+                  }
+                ],
+                "flags": [
+                  "hidden"
+                ],
+                "path": "goggame-1207658930.info",
+                "type": "DepotFile"
+              },
+              {
+                "chunks": [
+                  {
+                    "compressedMd5": "0812e871154b26f4737364abc193e2bc",
+                    "compressedSize": 1177139,
+                    "md5": "143e880fed5ba39967f23785c3cc868b",
+                    "size": 1288912
+                  }
+                ],
+                "flags": [
+                  "support",
+                  "executable"
+                ],
+                "path": "galaxy_the_witcher2_ee_3.5.0.26.exe",
+                "type": "DepotFile"
+              }
+            ]
+          },
+          "version": 2
+        }
 
 
 gameplay.gog.com
