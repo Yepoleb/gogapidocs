@@ -155,7 +155,7 @@ api.gog.com
     Same as :http:get:`/products/(int:product_id)`, but supports multiple
     products per request. Results are returned as an array.
 
-    :query str ids: Comma separated product IDs.
+    :query str ids: Up to 50 comma separated product IDs.
 
     **Example request**:
 
@@ -532,6 +532,8 @@ cdn.gog.com
             ]
           }
         }
+
+.. http:get:: /content-system/v1/depots/(int:product_id)/windows/(int:depot_id)/(str:file)
 
 .. http:get:: /content-system/v2/meta/(str:hash)
 
