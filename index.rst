@@ -3,7 +3,8 @@ GOG API Documentation
 
 Welcome to the unoffical documentation of the APIs used by the GOG website and
 Galaxy client. It's a very young project, so don't be surprised if something is
-missing.
+missing. But now get ready for a wild ride into a world where GET and POST
+don't mean anything and consistency is a lucky mistake.
 
 Contents
 --------

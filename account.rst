@@ -422,7 +422,7 @@ Games & Movies
 
     Returns review IDs the user has voted on.
 
-    **Example response**:
+    **Example request**:
 
     .. sourcecode:: http
 
@@ -441,13 +441,39 @@ Games & Movies
           "checksum": "76c03aa67251e46db3271adf4641b815"
         }
 
-.. http:any:: /account/hideProduct/(int:product_id)
+.. http:post:: /account/hideProduct/(int:product_id)
 
     Hides a product from your library.
 
-.. http:any:: /account/revealProduct/(int:product_id)
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /user/hideProduct/1430740458 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
+
+.. http:post:: /account/revealProduct/(int:product_id)
 
     Unhides a product from your library.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /user/revealProduct/1430740458 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
 
 
 Wishlist
@@ -497,7 +523,7 @@ Wishlist
 
     **Example response**:
 
-    See :http:get:`/user/wishlist.json`
+    Same as :http:get:`/user/wishlist.json`
 
 .. http:get:: /user/wishlist/remove/(int:product_id)
 
@@ -512,29 +538,188 @@ Wishlist
 
     **Example response**:
 
-    See :http:get:`/user/wishlist.json`
+    Same as :http:get:`/user/wishlist.json`
 
 
 Tags
 ----
 
-.. http:any:: /account/tags/add
+.. http:post:: /account/tags/attach
 
-.. http:any:: /account/tags/attach
+    Adds a tag to a product.
 
-.. http:any:: /account/tags/detach
+    :query int product_id: Product ID to add the tag to
+    :query int tag_id: ID of the tag to attach
 
-.. http:any:: /account/tags/delete
+    **Example request**:
 
-.. http:any:: /account/tags/update
+    .. sourcecode:: http
+
+        POST /account/tags/attach?product_id=1430740458&tag_id=301045732 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "success": true
+        }
+
+.. http:post:: /account/tags/detach
+
+    Removes a tag to a product.
+
+    :query int product_id: Product ID to remote the tag from
+    :query int tag_id: ID of the tag to detach
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /account/tags/detach?product_id=1430740458&tag_id=301045732 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "success": true
+        }
+
+.. http:post:: /account/tags/add
+
+    Creates a new tag.
+
+    :query str name: Name of the new tag
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /account/tags/add?name=MYTAG HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "id": "301045732"
+        }
+
+.. http:post:: /account/tags/delete
+
+    Deletes a tag.
+
+    :query int tag_id: ID of the tag to delete
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /account/tags/delete?tag_id=301045732 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "status": "deleted"
+        }
+
+.. http:post:: /account/tags/update
+
+    Updates the tag list. Data isn't actually posted but included as a
+    query parameter *(wat!?)*.
+
+    :query json tags: URL-encoded json data of the tags
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /account/tags/update?tags=%5B%7B%22id%22:%22301045732%22... HTTP/1.1
+        Host: embed.gog.com
+
+    **Example request data**:
+
+    This is the urldecoded content of the query parameter.
+
+    .. sourcecode:: json
+
+        [{
+          "id": "372082953",
+          "name": "MYTAG"
+        }, {
+          "id": "243982903",
+          "name": "COMPLETED",
+          "productCount": "12"
+        }, {
+          "id": "243982893",
+          "name": "NEXT TO PLAY",
+          "productCount": "4"
+        }, {
+          "id": "243982883",
+          "name": "BACKLOG",
+          "productCount": "0"
+        }, {
+          "id": "243982873",
+          "name": "FAVORITE",
+          "productCount": "0"
+        }]
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "status": "updated"
+        }
 
 
 Settings
 --------
 
-.. http:any:: /account/save_birthday/(birthday)
+.. http:get:: /account/save_birthday/(str:date)
 
-.. http:any:: /account/save_country/(country)
+    Sets the birthday.
+
+    :param date: Date in ISO 8601 format
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /account/save_birthday/2000-12-31 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
+
+.. http:get:: /account/save_country/(str:country)
+
+    Sets the country.
+
+    :param country: Country as ISO 3166 code
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /account/save_country/AT HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
 
 .. http:any:: /account/save_newsletter_subscription/(bool:subscribe)
 
@@ -544,13 +729,66 @@ Settings
 
 .. http:any:: /account/save_pm/(bool:receive)
 
-.. http:any:: /account/save_sharing_wishlist/(share)
+.. http:any:: /account/save_sharing_wishlist/(int:privacy)
 
-.. http:any:: /account/save_chat_privacy/(private)
+    Sets if the wishlist is public.
 
-.. http:any:: /account/save_search_privacy/(bool:private)
+    :param privacy: Can be 0 (nobody), 1 (everyone) or 2 (friends only)
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /account/save_sharing_wishlist/1 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
+
+.. http:get:: /account/save_chat_privacy/(int:privacy)
+
+    Sets the chat privacy setting.
+
+    :param privacy: Can be 0 (nobody), 1 (anyone) or 2 (friends only)
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /account/save_chat_privacy/1 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
+
+.. http:get:: /account/save_search_privacy/(bool:privacy)
+
+    Changes if the user can be found by name or email.
+
+    :param privacy: Can be 0 (search disabled) or 1 (search enabled)
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /account/save_search_privacy/1 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
 
 .. http:any:: /account/logout_all_sessions
+
+.. http:get:: /account/refresh
 
 .. http:any:: /account/settings/cards/(card)
 
@@ -615,6 +853,43 @@ Settings
     .. sourcecode:: json
 
         {}
+
+
+Avatar
+------
+
+This request uses the login.gog.com domain instead of the regular gog.com
+or embed.gog.com.
+
+.. http:post:: /account/avatar
+
+    Upload a profile avatar.
+
+    **Example response**:
+
+    .. sourcecode:: http
+
+        POST /account/avatar HTTP/1.1
+        Host: login.gog.com
+
+        Content-Disposition: form-data; name="files[]"; filename="avatar.png"
+        Content-Type: image/png
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "avatars": {
+            "small": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avs.jpg",
+            "small_2x": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avs2.jpg",
+            "medium": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avm.jpg",
+            "medium_2x": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avm2.jpg",
+            "large": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avl.jpg",
+            "large_2x": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avl2.jpg"
+          }
+        }
+
 
 Friends
 -------
