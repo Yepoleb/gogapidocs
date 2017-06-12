@@ -170,14 +170,6 @@ User
           }
         }
 
-.. http:get:: /users/(int:user_id)/block
-
-    TODO
-
-.. http:get:: /users/(int:user_id)/unblock
-
-    TODO
-
 
 Games & Movies
 --------------
@@ -721,15 +713,64 @@ Settings
 
         {}
 
-.. http:any:: /account/save_newsletter_subscription/(bool:subscribe)
+.. http:get:: /account/save_newsletter_subscription/(bool:subscribed)
 
-.. http:any:: /account/save_promo_subscription/(bool:subscribe)
+    Enable notifications for releases and announcements.
 
-.. http:any:: /account/save_wishlist_notification/(bool:subscribe)
+    :param subscribed: 0 (unsubscribe), 1 (subscribe)
 
-.. http:any:: /account/save_pm/(bool:receive)
+    **Example request**:
 
-.. http:any:: /account/save_sharing_wishlist/(int:privacy)
+    .. sourcecode:: http
+
+        GET /account/save_newsletter_subscription/1 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
+
+.. http:get:: /account/save_promo_subscription/(bool:subscribed)
+
+    Enable notifications for promos and deals.
+
+    :param subscribed: 0 (unsubscribe), 1 (subscribe)
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /account/save_promo_subscription/1 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
+
+.. http:get:: /account/save_wishlist_notification/(bool:subscribed)
+
+    Enable notifications for whishlist items on sale.
+
+    :param subscribed: 0 (unsubscribe), 1 (subscribe)
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /account/save_wishlist_notification/1 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
+
+.. http:get:: /account/save_sharing_wishlist/(int:privacy)
 
     Sets if the wishlist is public.
 
@@ -771,7 +812,10 @@ Settings
 
     Changes if the user can be found by name or email.
 
-    :param privacy: Can be 0 (search disabled) or 1 (search enabled)
+    :param privacy:
+
+        * 0 (search disabled)
+        * 1 (search enabled)
 
     **Example request**:
 
@@ -786,11 +830,20 @@ Settings
 
         {}
 
-.. http:any:: /account/logout_all_sessions
+.. http:post:: /account/logout_all_sessions
 
-.. http:get:: /account/refresh
+    **Example request**:
 
-.. http:any:: /account/settings/cards/(card)
+    .. sourcecode:: http
+
+        GET /account/logout_all_sessions HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {}
 
 .. http:get:: /user/changeCurrency/(str:currency)
 
@@ -841,7 +894,7 @@ Settings
         piano_black.
     :type background_name: str
 
-    **Example response**:
+    **Example request**:
 
     .. sourcecode:: http
 
@@ -854,18 +907,12 @@ Settings
 
         {}
 
-
-Avatar
-------
-
-This request uses the login.gog.com domain instead of the regular gog.com
-or embed.gog.com.
-
 .. http:post:: /account/avatar
 
-    Upload a profile avatar.
+    Upload a profile avatar. This request uses the login.gog.com domain
+    instead of the regular gog.com.
 
-    **Example response**:
+    **Example request**:
 
     .. sourcecode:: http
 
@@ -894,12 +941,144 @@ or embed.gog.com.
 Friends
 -------
 
-.. http:any:: /friends/search
+.. http:post:: /friends/search
 
-.. http:get:: /friends/remove/(int:user_id)
+    Search for GOG users.
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /friends/search HTTP/1.1
+        Host: embed.gog.com
+
+        {
+          "query": "Yepoleb"
+        }
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        {
+          "id": "48628349971017",
+          "galaxyUserId": "48628349957132247",
+          "username": "Yepoleb",
+          "userSince": 1449237763,
+          "avatars": {
+            "small": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avs.jpg",
+            "small2x": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avs2.jpg",
+            "medium": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avm.jpg",
+            "medium2x": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avm2.jpg",
+            "large": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avl.jpg",
+            "large2x": "https:\/\/images.gog.com\/d7d8e3ed8ad2d9fd3557c83c4237a913b14e621c84e21fab594a9d961cd98fe4_avl2.jpg"
+          }
+        }
 
 .. http:get:: /friends/invite/(int:user_id)
 
+    Send a friend invite to a user. **Warning: Response is not an object and
+    may break certain JSON decoders.**
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /friends/invite/17081829469374 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        "ok"
+
+.. http:get:: /friends/remove/(int:user_id)
+
+    Removes a friend from your friends list. **Warning: Response is not an
+    object and may break certain JSON decoders.**
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /friends/remove/17081829469374 HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        "ok"
+
 .. http:get:: /friends/invites/(int:user_id)/accept
 
+    Accepts a friend invite. **Warning: Response is not an object and
+    may break certain JSON decoders.**
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /friends/invites/17081829469374/accept HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        "ok"
+
 .. http:get:: /friends/invites/(int:user_id)/decline
+
+    Declines a friend invite. **Warning: Response is not an object and
+    may break certain JSON decoders.**
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /friends/invites/17081829469374/decline HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        "ok"
+
+.. http:get:: /users/(int:user_id)/block
+
+    Block communication from a user. **Warning: Response is not an object and
+    may break certain JSON decoders.**
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /friends/17081829469374/block HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        "ok"
+
+.. http:get:: /users/(int:user_id)/unblock
+
+    Unblock communication from a user. **Warning: Response is not an object and
+    may break certain JSON decoders.**
+
+    **Example request**:
+
+    .. sourcecode:: http
+
+        POST /friends/17081829469374/unblock HTTP/1.1
+        Host: embed.gog.com
+
+    **Example response**:
+
+    .. sourcecode:: json
+
+        "ok"
