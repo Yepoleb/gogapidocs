@@ -535,6 +535,13 @@ cdn.gog.com
 
 .. http:get:: /content-system/v1/depots/(int:product_id)/windows/(int:depot_id)/(str:file)
 
+    **Example request**:
+
+    .. sourcecode:: http
+
+        GET /content-system/v1/depots/1207658930/windows/main.bin HTTP/1.1
+        Host: cdn.gog.com
+
 .. http:get:: /content-system/v2/meta/(str:hash)
 
     Content-System V2 responses are zlib encoded (window size 15).
