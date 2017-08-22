@@ -11,6 +11,7 @@ api.gog.com
     :query str expand: Comma separated list of additional sections to request.
         Possible values: downloads, expanded_dlcs, description, screenshots,
         videos, related_products, changelog
+    :query str locale: Locale code
 
     **Example request**:
 
