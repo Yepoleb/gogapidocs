@@ -849,8 +849,9 @@ Settings
 
     Changes the default currency.
 
-    :param currency: One of the available currency codes from
-                     :http:get:`/userData.json`
+    :param currency: ISO 4217 currency code, currently available: USD, EUR,
+        GBP, AUD, RUB, PLN, CAD, CHF, NOK, SEK and DKK. Please only use the
+        ones listed in :http:get:`/userData.json`.
     :type currency: str
 
     **Example request**:
@@ -870,7 +871,8 @@ Settings
 
     Changes the used locale.
 
-    :param language: Language to use, possible values: en, de, fr, ru, pt
+    :param language: Language to use, possible values: de-DE, en-US, fr-FR,
+        pt-BR, ru-RU, zh-Hans
     :type language: str
 
     **Example request**:
