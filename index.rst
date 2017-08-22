@@ -14,7 +14,7 @@ Contents
 
    auth
    account
-   searching
+   listing
    store
    reviews
    connect
