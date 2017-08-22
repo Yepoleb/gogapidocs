@@ -13,19 +13,17 @@ complete the login process.
 Auth-Flow
 ---------
 
-1. First you need a web server to receive the login code. I'm running a Python
-   HTTPServer on my local machine, but anything that supports dynamically
-   generated content should work. The url for it is http://localhost:8000/token.
+1. Use an embedded browser like WebKit, Gecko or CEF to send the user to
+   https://auth.gog.com/auth. An add-on in your desktop browser should work as
+   well. The exact details about the parameters of this request are described
+   below.
 
-2. Send the user to https://auth.gog.com/auth and use the url to your web server
-   as redirect url. More details about the parameters of this request are
-   described below.
+2. Once the login process is completed, the user should be redirected to
+   https://www.gog.com/on_login_success with a login "code" appended at the
+   end. Use the callbacks of your browser engine to detect it, take the
+   code and use it to request a token.
 
-3. Once the login process is completed, the user should be redirected to your
-   server with a login "code" appended to the url. Take that code and use it to
-   request a token.
-
-4. Renew the token when it expires after about an hour. Check the original
+3. Renew the token when it expires after about an hour. Check the original
    response for an accurate lifetime.
 
 Authorizing a Request
@@ -50,9 +48,10 @@ Methods
     Redirects to the login site. Don't use this directly from your client, it's
     not a JSON API, visit it with a web browser instead.
 
-    :query str client_id: OAuth2 Client ID. Use ``46899977096215655`` until we know
-        how to get our own IDs.
-    :query str redirect_id: Your redirect url that will receive the login code.
+    :query str client_id: OAuth2 Client ID. Use ``46899977096215655``.
+    :query str redirect_url: URL where the browser will be redirected after the
+        login has been completed. Use
+        https://embed.gog.com/on_login_success?origin=client
     :query str response_type: Use ``code``
     :query str layout: Use ``client2``
 
@@ -60,7 +59,7 @@ Methods
 
     .. sourcecode:: http
 
-        GET /auth?client_id=46899977096215655&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Ftoken&response_type=code&layout=client2 HTTP/1.1
+        GET /auth?client_id=46899977096215655&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&response_type=code&layout=client2 HTTP/1.1
         Host: auth.gog.com
 
     **Example redirect**:
@@ -85,8 +84,8 @@ Methods
     :query str redirect_uri:
         **Only for new logins:** The redirect URL you used in the auth request.
     :query str refresh_token:
-        **Only for refreshes:** The refresh_token you got from an old token. This
-        is a separate entry, not the old access token.
+        **Only for refreshes:** The refresh_token you got from an old token.
+        This is a separate entry, not the old access token.
 
     **Example request**:
 
