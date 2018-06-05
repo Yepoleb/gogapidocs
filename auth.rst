@@ -49,7 +49,7 @@ Methods
     not a JSON API, visit it with a web browser instead.
 
     :query str client_id: OAuth2 Client ID. Use ``46899977096215655``.
-    :query str redirect_url: URL where the browser will be redirected after the
+    :query str redirect_uri: URL where the browser will be redirected after the
         login has been completed. Use
         https://embed.gog.com/on_login_success?origin=client
     :query str response_type: Use ``code``
