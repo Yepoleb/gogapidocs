@@ -393,6 +393,108 @@ content-system.gog.com
           "has_private_branches": false
         }
 
+.. http:get::  /products/(int:product_id)/secure_link?generation=2&path=/&_version=2
+
+   Returns secure links used to download the chunks of the files contained on a manifest of a build :http:get:`/content-system/v2/meta/(str:hash)`
+    
+    This call must be authenticated See :doc:`/auth`
+    
+    The response contains various servers to make the download from, each server has diferent tokens, hosts and methods to create the URL.
+    
+    **Example request**:
+    
+    .. sourcecode:: http
+    
+    GET /products/1589675197/secure_link?generation=2&path=/&_version=2
+    Host: content-system.gog.com
+    
+    **Example response**:
+
+    .. sourcecode:: json
+    
+        {
+          "product_id": 1589675197,
+          "type": "depot",
+          "urls": [
+            {
+              "endpoint_name": "lumen",
+              "max_fails": 100,
+              "parameters": {
+                "base_url": "https://gog-cdn-lumen.secure2.footprint.net",
+                "dirs": 4,
+                "expires_at": 1634898750,
+                "path": "/content-system/v2/store/1589675197",
+                "token": "0ed0f72313781728949"
+              },
+              "priority": 91,
+              "supports_generation": [
+                2
+              ],
+              "url_format": "{base_url}/token=nva={expires_at}~dirs={dirs}~token={token}{path}"
+            },
+            {
+              "endpoint_name": "akamai_edgecast_proxy",
+              "max_fails": 100,
+              "parameters": {
+                "base_url": "https://cdn-akamai-ec.gog-services.com",
+                "path": "content-system/v2/store/1589675197",
+                "token": "exp=163494250~acl=/content-system/v2/store/1589675197/*~hmac=6372f17d5570db009745732c2ede2365e8528923ff0a6ab4302fb7f1bb951e"
+              },
+              "priority": 3,
+              "supports_generation": [
+                2
+              ],
+              "url_format": "{base_url}/{path}?__token__={token}"
+            },
+            {
+              "endpoint_name": "edgecast",
+              "max_fails": 100,
+              "parameters": {
+                "base_url": "https://cdn.gog.com",
+                "path": "content-system/v2/store/1589675197",
+                "token": "QAvwDXOpq-pgu8UwmFotAgI32I3ZTdI-JWGtVDsJPWlF0IxrlZTcQtKrEswCucBMyKuIak0FAFZhQSpkYw0ihW3kzllJeRGYOVx7miFRHo4iavcqbZANivI8ZLO2-X0"
+              },
+              "priority": 2,
+              "supports_generation": [
+                1,
+                2
+              ],
+              "url_format": "{base_url}/{path}?{token}"
+            },
+            {
+              "endpoint_name": "high_winds",
+              "max_fails": 10,
+              "parameters": {
+                "base_url": "https://cdn-hw.gog.com",
+                "gog_token": "eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4Q0JDLUhTMjU0.iUZayDAUNDzhrRdGYdCb5L79YF_IowrdbS60zQLOiklkzKqUgw_X7w.vSFUKzASL4FfIRomGkpwfQ.CK2Fs08Fg1VHwCtao9aBLt0mY_Ps23HU1yyBN6HsAbQOU-Gzr8i4CbzU43ErEpmuFiCZU6INZZ2LBabMPQwxzK4wd2aR8H7qtgdIBbjnNLwjqWEtM5WEE-0e6qV-0G9TagGOxglvQ5-hMfr9MJfUeklajDgzOoxckYo53Iq_g8HIJaiZegwXak7EJpyceBX7FHHjvG72po3TNuQoXLZqTQ3hdC8FrMfiRws8AYdpL8ZKwumo1oJi2PAoDsyE1fbxlSDFAmB8idLIugeNg0VNNbNux2ZUR9mMKKx1YrvTxJMmfmR_-TojBbWEydVs4ucvRzYlDGk2n6wkyfivmiHxzkpAxg227fpQGAW8ex7bI0855QE9pq2OjDB8OjKkakn5.wNVwxjoyngOF1uqrDYQ0iw",
+                "l": 35,
+                "path": "content-system/v2/store/1589675197",
+                "source": "hw",
+                "token": "463150c61aa5bb021cb015a75ddc39",
+                "ttl": 1634984250
+              },
+              "priority": 2,
+              "supports_generation": [
+                2
+              ],
+              "url_format": "{base_url}/{path}?ttl={ttl}&hw_l={l}&hw_token={token}&_token={gog_token}&source={source}"
+            },
+            {
+              "endpoint_name": "gog_cdn",
+              "max_fails": 10,
+              "parameters": {
+                "base_url": "https://cdn-api.gog.com",
+                "path": "content-system/v2/store/1589675197",
+                "token": "eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0.ibwXbYCL4SIq909rlDugOg8vY45vOO-sqi3N1oryo8xWr2MymriAbw.6XS4PkrEUclcijoZp4hGIA.-4MDwzahsRJMjfJzD26t4JlQRe6Xa7fIQMHZM_axxysu_qn4-MJ1e30VK-lQCZH-OQvVdmTRDmQb79v3SW9y597ZqCbL1mYVT8f_vQJRIDZQTD_y2i4HLCWjTSMYBZPmk1Ne08KExVYpS0VqV5PNlwR8jLD8HCUbbQmhicq6v-rTe08ifL90XhEsRXtJqthRd_tlZQBZ7a1pkQ2G2Ormqf7WW8z225AuH2JYNZtvOI3ufLAGByzlQNUKj3cumvvlSk1dReEMZa2Z8S5swaT-QMLPJmGUqTc0exJPf6xYoBx3O0Ic9Ow8-pjkduVEsHliJjctQsKWNvtKzSoupTJMIJDZeDgBBDcZVW19v5OxOd-KnyTojIr0a8rQ4ob.wC9R61x4-B--nMU6KIML8g"
+              },
+              "priority": 2,
+              "supports_generation": [
+                2
+              ],
+              "url_format": "{base_url}/{path}?_token={token}"
+            }
+          ]
+        }
 
 cdn.gog.com
 -----------
@@ -545,7 +647,14 @@ cdn.gog.com
 
 .. http:get:: /content-system/v2/meta/(str:hash)
 
-    Content-System V2 responses are zlib encoded (window size 15).
+    Content-System V2 responses are zlib encoded (window size 15), can be decoded in console with "zlib-flate -uncompress"
+    
+    Used with a Build hash obtained from :http:get:`/products/(int:product_id)/os/windows/builds?generation=2`, this endpoint returns the depots of the files.    
+    
+    Used with a Depot manifest hash obtained from :http:get:`/content-system/v2/meta/(str:hash)`, this endpoint returns the files inside the Depot and the chunks to download the file. Generate a url with the information obtained from :http:get:`/products/(int:product_id)/secure_link?generation=2&path=/&_version=2` to download the chunks
+    
+    :param hash: content hash str formed as "/"2 first chars"/"2 second chars"/"full hash  92ab42631ff4742b309bb62c175e6306 is 92/ab/92ab42631ff4742b309bb62c175e6306
+    :type hash: str
 
     **Example request**:
 
