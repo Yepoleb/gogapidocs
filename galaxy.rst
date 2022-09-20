@@ -348,7 +348,8 @@ content-system.gog.com
     :param os: Game OS. Possible values: windows, osx.
     :type os: str
     :query int generation: Max manifest version. Can be 1 or 2.
-
+    :query int _version: Include individual CDN links or not, Can be 1 (don't include/default) or 2 (include)
+    
     **Example request**:
 
     .. sourcecode:: http
